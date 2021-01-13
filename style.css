@@ -1,0 +1,10 @@
+body {
+    text-align: center;
+}
+
+.container {
+    border: 2px solid grey;
+    border-radius: 10px;
+    background-color: rgb(189, 186, 186);
+    color: white;
+}

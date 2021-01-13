@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" media="screen" href="style.css"/>
+</head>
+<body>
+    <div id="app">
+
+        <h1>{{title}}</h1>
+
+        <div class="container">
+            <h2>Choose the math operation</h2>
+            <br>
+            <button @click="operator.name = 'Sum'; operator.symbol = '+'; generateOperations()" class="btn btn-primary">Sum</button>
+            <button @click="operator.name = 'Substraction'; operator.symbol = '-'; generateOperations()" class="btn btn-primary">Substraction</button>
+            <button @click="operator.name = 'Division'; operator.symbol = '/'; generateOperations()" class="btn btn-primary">Division</button>
+            <button @click="operator.name = 'Multiplication'; operator.symbol = '*'; generateOperations()" class="btn btn-primary">Multiplication</button>
+            <br>
+            <br>
+            <div v-if="operator.name !== ''"><h4>You selected {{operator.name}}</h4></div>
+            <br>
+            <button v-if="operator.name !== ''" @click="startQuiz()" class="btn btn-primary">Start</button>
+            <br>
+            <br>
+            <div v-if="selectedOperator">
+                <p><h1>{{leftOperator}} {{operator.symbol}} {{rightOperator}}</h1></p>
+                <br>
+                <br>
+                <p>What is the right answer?</p>
+                <button @click="checkResponse(solution)" class="btn btn-primary mx-1" v-for="(solution, index) in solutions" :key="index">{{solution}}</button>
+                <br>
+                <br>
+                <button @click="manageScore()" class="btn btn-primary">Next</button>
+                <p><h3>Score: {{score}}</h3></p>
+                <div v-if="score >= 0" class="progress">
+                    <div class="progress-bar bg-success" role="progressbar" :style="{ width: percentageScore + '%'}" :aria-valuenow="score" aria-valuemin="0" aria-valuemax="10"></div>
+                </div>
+                <div v-else class="progress">
+                    <div class="progress-bar bg-danger" role="progressbar" :style="{ width: percentageScore + '%'}" :aria-valuenow="score" aria-valuemin="0" aria-valuemax="10"></div>
+                </div>
+
+                <br>
+                <button @click="selectedOperator = false; operator.name = ''" class="btn btn-primary">Stop</button>
+                <br>
+                <br>
+            </div>
+
+
+        </div>
+        
+	</div>
+    <script src="main.js"></script>
+</body>
+</html>
